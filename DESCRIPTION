@@ -1,0 +1,28 @@
+Package: gitr
+Version: 0.0.1
+Date: 2013-06-26
+Description: Programmatic interface to git/github from R
+Title: R interface to git/github
+License: C00
+Author: Scott Chamberlain
+Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
+URL: https://github.com/ropensci/gitr
+LazyLoad: yes
+LazyData: yes
+VignetteBuilder: knitr
+Depends:
+    RCurl,
+    XML,
+    plyr,
+    httr,
+    rjson
+Collate:
+    'colClasses.r'
+    'g_allrepos.r'
+    'g_auth.r'
+    'g_commits.r'
+    'g_createrepo.r'
+    'g_getauth.r'
+    'g_repo.r'
+    'g_timeseries.r'
+    'gitr-package.R'

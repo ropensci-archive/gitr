@@ -1,0 +1,27 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{An R Markdown Vignette made with knitr}
+-->
+
+gitr vignette - wrapper to git and GitHub
+======
+
+### About the package
+
+`gitr` is an R package to interact with the GitHub API, and therefore git.
+
+********************
+
+### Info
+
++ [GitHub][githubapi] for API docs for the GitHub API.
+
+********************
+
+#### Install gitr
+
+```{r install, comment=NA, warning=FALSE}
+library(gitr, quietly=TRUE)
+```
+
+[githubapi]: http://schamberlain.github.io/scott/
