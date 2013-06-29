@@ -1,4 +1,4 @@
-#' List GitHub issues globally, for 
+#' Create a GitHub issue.
 #' 
 #' @import httr
 #' @param type One of global, user, or org. If org, specify a GittHub organization 
@@ -37,13 +37,10 @@
 #' @examples \dontrun{
 #' g_auth()
 #' options(useragent='ropensci')
-#' g_issues()
-#' g_issues('user')
-#' g_issues('user', 'mentioned')
-#' g_issues('org', 'ropensci')
+#' g_issue_create()
 #' }
 #' @export
-g_issues <- function(type='global', org = NULL, filter = 'all', state = NULL, 
+g_issue_create <- function(type='global', org = NULL, filter = 'all', state = NULL, 
                      labels = NULL, sort = NULL, direction = NULL, since = NULL,
                      parse = TRUE)
 {
@@ -58,9 +55,9 @@ g_issues <- function(type='global', org = NULL, filter = 'all', state = NULL,
   
   if(type == 'global'){ url <- "https://api.github.com/issues" } else
     if(type == 'user'){ url <- "https://api.github.com/user/issues" } else
-      { url <- sprintf("https://api.github.com/orgs/%s/issues", org) }
+    { url <- sprintf("https://api.github.com/orgs/%s/issues", org) }
   args <- compact(list(access_token=access_token, filter=filter, state=state, 
-               labels=labels, direction=direction, since=since))
+                       labels=labels, direction=direction, since=since))
   out <- content(GET(url, add_headers('User-Agent' = useragent), query=args))
   
   if(parse){
@@ -92,10 +89,9 @@ g_issues <- function(type='global', org = NULL, filter = 'all', state = NULL,
 print.issues <- function(x)
 {
   if(!is.issues(x))
-    stop("Input is not of class issues")
-  temp <- ldply(x, function(y) c(issue_no=y$info$number,issue_title=y$info$title))
+    stop("Input is not of class issues")  
   cat("\nIssue Titles\n")
-  print(temp)
+  print(ldply(x, function(y) data.frame(c(y$info$number,y$info$title))))
 }
 
 #' Check if object is of class issues

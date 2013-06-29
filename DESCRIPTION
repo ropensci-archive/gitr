@@ -27,3 +27,6 @@ Collate:
     'g_commit_create.r'
     'g_commit_get.r'
     'g_issues.r'
+    'g_issue_create.r'
+    'g_issue_get.r'
+    'g_issue_repo.r'

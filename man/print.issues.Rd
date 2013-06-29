@@ -3,8 +3,12 @@
 \title{Print summary, just issue titles and IDs}
 \usage{
   \method{print}{issues} (x)
+
+  \method{print}{issues} (x)
 }
 \description{
+  Print summary, just issue titles and IDs
+
   Print summary, just issue titles and IDs
 }
 
