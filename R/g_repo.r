@@ -28,7 +28,7 @@ g_repo <- function(userorg = NA, repo = NA, return_ = 'show')
 	url2 <- paste(url, userorg, '/', repo, sep='')
   args <- list(access_token=access_token)
   tt = content(GET(url2, add_headers('User-Agent' = useragent), query=args))
-# 	tt = content(GET(url2, session))
+
 	if(return_=='show'){tt} else
 	if(return_=='allstats'){
     	list('watchers'=tt$watchers, 'open_issues'=tt$open_issues, 

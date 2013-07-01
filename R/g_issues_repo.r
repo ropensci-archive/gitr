@@ -13,7 +13,7 @@
 #' @export
 g_issue_repo <- function(owner, repo, milestone = NULL, assignee = NULL, creator = NULL,
                          mentioned = NULL, labels = NULL, sort = NULL, direction = NULL, 
-                         since = NULL, parse = TRUE)
+                         since = NULL, comments = FALSE, ...)
 {
   useragent <- getOption('useragent')
   if(is.null(useragent))
@@ -23,28 +23,25 @@ g_issue_repo <- function(owner, repo, milestone = NULL, assignee = NULL, creator
   if(is.null(access_token))
     stop('You must authenticate with Github first, see g_auth()')
   
-  url <- sprintf("https://api.github.com/repos/%s/%s/issues", owner, repo)
+  if(comments)
+    url <- sprintf("https://api.github.com/repos/%s/%s/issues/comments", owner, repo)
+  else
+    url <- sprintf("https://api.github.com/repos/%s/%s/issues", owner, repo)
   args <- compact(list(access_token=access_token,milestone=milestone,assignee=assignee,
                        creator=creator,mentioned=mentioned,labels=labels,sort=sort,
                        direction=direction,since=since))
-  out <- content(GET(url, add_headers('User-Agent' = useragent), query=args))
+  res <- content(GET(url, add_headers('User-Agent' = useragent), query=args, ...))
   
-  if(parse){
-    parseout <- function(x){
-      urls <- x[c('url','labels_url','comments_url','events_url','html_url')]
-      info <- x[c('id','number','title','state','assignee','milestone','comments','created_at','updated_at','closed_at')]
-      user <- data.frame(x$user)
-      pull_request <- data.frame(x$pull_request)
-      repo_owner <- x$repository[['owner']]
-      repo <- x$repository[!names(x$repository) %in% 'owner']
-      body <- x$body
-      list(urls = urls, info = info, user = user, pull_request = pull_request, repo = repo, body = body)
-    }
-    out <- llply(out, parseout)
+  if(comments){
+    if(length(res)==1)
+      out <- parse_issue_comments(res)
+    else
+      out <- llply(res, parse_issue_comments)
     class(out) <- 'issues'
     out
   } else
   {
+    out <- llply(res, parse_issue)
     class(out) <- 'issues'
     out
   }

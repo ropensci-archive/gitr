@@ -1,4 +1,4 @@
-#' List GitHub issues globally, for 
+#' List GitHub issues globally, for XXXX.
 #' 
 #' @import httr
 #' @param type One of global, user, or org. If org, specify a GittHub organization 
@@ -64,17 +64,7 @@ g_issues <- function(type='global', org = NULL, filter = 'all', state = NULL,
   out <- content(GET(url, add_headers('User-Agent' = useragent), query=args))
   
   if(parse){
-    parseout <- function(x){
-      urls <- x[c('url','labels_url','comments_url','events_url','html_url')]
-      info <- x[c('id','number','title','state','assignee','milestone','comments','created_at','updated_at','closed_at')]
-      user <- data.frame(x$user)
-      pull_request <- data.frame(x$pull_request)
-      repo_owner <- x$repository[['owner']]
-      repo <- x$repository[!names(x$repository) %in% 'owner']
-      body <- x$body
-      list(urls = urls, info = info, user = user, pull_request = pull_request, repo = repo, body = body)
-    }
-    res <- llply(out, parseout)
+    res <- llply(out, parse_issue)
     class(res) <- 'issues'
     res
   }
@@ -84,21 +74,3 @@ g_issues <- function(type='global', org = NULL, filter = 'all', state = NULL,
     out
   }
 }
-
-#' Print summary, just issue titles and IDs
-#' @method print issues
-#' @S3method print issues
-#' @export
-print.issues <- function(x)
-{
-  if(!is.issues(x))
-    stop("Input is not of class issues")
-  temp <- ldply(x, function(y) c(issue_no=y$info$number,issue_title=y$info$title))
-  cat("\nIssue Titles\n")
-  print(temp)
-}
-
-#' Check if object is of class issues
-#' @param x input
-#' @export
-is.issues <- function(x) inherits(x, "issues")

@@ -1,4 +1,4 @@
-#' Get GitHub metrics on a user or organization's repositories.
+#' List GitHub repositories for a user or organization.
 #' 
 #' @import httr
 #' @param userorg User or organization GitHub name.
@@ -29,9 +29,7 @@ g_allrepos <- function(userorg = NA, type = 'org', return_ = 'names', per_page =
   { url2 <- paste0(url, 'users/', userorg, '/repos') }
   args <- list(access_token=access_token, per_page=per_page)
   tt = content(GET(url2, add_headers('User-Agent' = useragent), query=args))
-#   url2 <- paste(url, userorg, '/repos?per_page=100', sep='')
-#   tt = content(GET(url2, config=session, user_agent('rOpenSci')))
-#   tt = content(GET(url2, user_agent('rOpenSci')))
+  
   if(return_=='show'){tt} else
     if(return_=='names'){
         sapply(tt, function(x) x$name)

@@ -1,6 +1,6 @@
 \name{g_issues}
 \alias{g_issues}
-\title{List GitHub issues globally, for}
+\title{List GitHub issues globally, for XXXX.}
 \usage{
   g_issues(type = "global", org = NULL, filter = "all",
     state = NULL, labels = NULL, sort = NULL,

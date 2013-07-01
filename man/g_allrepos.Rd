@@ -1,6 +1,6 @@
 \name{g_allrepos}
 \alias{g_allrepos}
-\title{Get GitHub metrics on a user or organization's repositories.}
+\title{List GitHub repositories for a user or organization.}
 \usage{
   g_allrepos(userorg = NA, type = "org", return_ = "names",
     per_page = 100)
@@ -18,8 +18,7 @@
   Vector of names or repos for organization or user.
 }
 \description{
-  Get GitHub metrics on a user or organization's
-  repositories.
+  List GitHub repositories for a user or organization.
 }
 \examples{
 \dontrun{
