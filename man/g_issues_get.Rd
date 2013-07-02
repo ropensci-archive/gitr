@@ -28,12 +28,6 @@ g_issues_get(owner='ropensci', repo='reml', issues=5)
 
 # Many issues
 g_issues_get(owner='ropensci', repo='reml', issues=5:7)
-
-# Get comments on a single issue
-g_issues_get(owner='ropensci', repo='reml', issues=5, comments=TRUE)
-
-# Get comments on multiple issues
-g_issues_get(owner='ropensci', repo='reml', issues=5:7, comments=TRUE)
 }
 }
 

@@ -13,7 +13,7 @@
 #' @export
 g_issue_repo <- function(owner, repo, milestone = NULL, assignee = NULL, creator = NULL,
                          mentioned = NULL, labels = NULL, sort = NULL, direction = NULL, 
-                         since = NULL, comments = FALSE, ...)
+                         since = NULL, ...)
 {
   useragent <- getOption('useragent')
   if(is.null(useragent))
@@ -23,26 +23,13 @@ g_issue_repo <- function(owner, repo, milestone = NULL, assignee = NULL, creator
   if(is.null(access_token))
     stop('You must authenticate with Github first, see g_auth()')
   
-  if(comments)
-    url <- sprintf("https://api.github.com/repos/%s/%s/issues/comments", owner, repo)
-  else
-    url <- sprintf("https://api.github.com/repos/%s/%s/issues", owner, repo)
+  url <- sprintf("https://api.github.com/repos/%s/%s/issues", owner, repo)
   args <- compact(list(access_token=access_token,milestone=milestone,assignee=assignee,
                        creator=creator,mentioned=mentioned,labels=labels,sort=sort,
                        direction=direction,since=since))
   res <- content(GET(url, add_headers('User-Agent' = useragent), query=args, ...))
   
-  if(comments){
-    if(length(res)==1)
-      out <- parse_issue_comments(res)
-    else
-      out <- llply(res, parse_issue_comments)
-    class(out) <- 'issues'
-    out
-  } else
-  {
-    out <- llply(res, parse_issue)
-    class(out) <- 'issues'
-    out
-  }
+  out <- llply(res, parse_issue)
+  class(out) <- 'issues'
+  out
 }

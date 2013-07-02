@@ -5,7 +5,7 @@
   g_issue_repo(owner, repo, milestone = NULL,
     assignee = NULL, creator = NULL, mentioned = NULL,
     labels = NULL, sort = NULL, direction = NULL,
-    since = NULL, comments = FALSE, ...)
+    since = NULL, ...)
 }
 \arguments{
   \item{repo}{Repository name, quoted.}
