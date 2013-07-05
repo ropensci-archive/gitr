@@ -5,11 +5,12 @@
 #' @param repo Repository name.
 #' @return A data frame with .
 #' @examples \dontrun{
+#' require(ggplot2)
 #' g_auth()
 #' options(useragent='ropensci')
 #' jekyll_commit <- g_commit_activity("mojombo","jekyll")
-#' week_sums <- ddply(jekyll_commit,.(Week),summarise,week_avg = mean(weekly_count))
-#' ggplot(week_sums,aes(x=Week,y=week_avg))+geom_point()+geom_path()+ylab("Weekly commit totals")
+#' week_sums <- ddply(jekyll_commit,.(week),summarise,week_avg = mean(weekly_count))
+#' ggplot(week_sums,aes(x=week,y=week_avg))+geom_point()+geom_path()+ylab("Weekly commit totals")
 #' }
 #' @export
 
@@ -32,7 +33,7 @@ g_commit_activity <- function(userorg,repo){
   days <- as.factor(c("Sun","Mon","Tue","Wed","Thu","Fri","Sat"))
   days <- ordered(days,c("Sun","Mon","Tue","Wed","Thu","Fri","Sat"))
   df_out$day <- rep(days,52)
-  colnames(df_out) <- c("daily_count","weekly_count","Week","Day")
+  colnames(df_out) <- c("daily_count","weekly_count","week","day")
   return(df_out)
   
 
