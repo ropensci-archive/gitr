@@ -2,7 +2,6 @@
 .RData
 .Rhistory
 .Rproj.user
-.gitignore
 gitr.Rproj
 .Rapp.history
 .Rbuildignore
