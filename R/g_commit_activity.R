@@ -5,7 +5,7 @@
 #' @param repo Repository name.
 #' @return A data frame with .
 #' @examples \dontrun{
-#' github_auth()
+#' g_auth()
 #' options(useragent='ropensci')
 #' jekyll_commit <- g_commit_activity("mojombo","jekyll")
 #' week_sums <- ddply(jekyll_commit,.(Week),summarise,week_avg = mean(weekly_count))
