@@ -13,7 +13,7 @@
 #' }
 #' @export
 
-g_commit_activity(userorg,repo){
+g_commit_activity <- function(userorg,repo){
   useragent <- getOption('useragent')
   if(is.null(useragent))
     stop('You must provide a User-Agent string')
