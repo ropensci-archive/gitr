@@ -36,3 +36,5 @@ Collate:
     'g_comments_delete.r'
     'g_comments_edit.r'
     'g_comments.r'
+    'g_code_freq.R'
+    'g_commit_activity.R'
