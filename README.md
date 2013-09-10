@@ -1,5 +1,7 @@
 # gitr #
 
+** WE HAVE STOPPED DEVELOPMENT ON THIS PACKAGE, DEFERRING TO [rgithub](https://github.com/cscheid/rgithub) ** 
+
 Install using install_github within Hadley's devtools package.
 
 ```R
