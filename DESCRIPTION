@@ -38,3 +38,5 @@ Collate:
     'g_comments.r'
     'g_code_freq.R'
     'g_commit_activity.R'
+    'g_gists.r'
+    'g_gists_create.r'

@@ -24,21 +24,21 @@ g_gists_create <- function(description=NULL, public='true', filename=NULL, conte
     stop('You must authenticate with Github first, see g_auth()')
 
   if(is.null(content))
-    content <- readLines()
+    content <- readLines(filename)
 
 # files <- '{"description":"my cool description", "public":true, "files": {"fromr.md" : {"content": "```coffee\\npoints <- rnorm(10)\\nplot(points)\\n```"}  }}'
   files <- paste0('{"description":"',description,'","public":',public,',"files":{"',filename,'":{"content":"',content,'"}}}')
-
+  
   url <- sprintf("https://api.github.com/gists?access_token=%s", access_token)
   out <- content(POST(url, add_headers('User-Agent' = useragent), body=I(files)))
   out
 }
 
 # thing <- '
-# #### Do a thing
+#### Do a thing
 # points <- rnorm(10)
 # plot(points)
 
-# #### Do something else
+#### Do something else
 # ![](http://upload.wikimedia.org/wikipedia/commons/3/39/Bachelor%27s_button%2C_Basket_flower%2C_Boutonniere_flower%2C_Cornflower_-_3.jpg)
 # '
